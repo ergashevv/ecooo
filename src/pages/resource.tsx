@@ -7,7 +7,13 @@ import parse from 'html-react-parser';
 import { Image } from 'antd';
 const Resource = () => {
   const { id } = useParams()
-
+  const h3 = document.getElementsByTagName('h3')
+  for(let i =0; i<h3.length; i++){
+    const h3El = h3[i]
+    h3El.style.color = 'black'
+  }
+  
+  
   const [data, setData] = React.useState(null);
   const url = `http://185.105.90.191:83/resource/${id}`
   React.useEffect(() => {
@@ -32,21 +38,26 @@ const Resource = () => {
   }, [url]);
   return (
     <div>
-      <div className="container pt-[110px]">
-        <div className="flex justify-center items-center flex-col">
-          <img src={data?.image} alt="" />
-          {/* <UserPen width={100} height={100} color="#3598FF" /> */}
-          <h1 className="text-slate-400 text-[60px]  font-mono">{data?.title}</h1>
-          <div className="service-page">
-            {/* <h1>{data?.title}</h1> */}
-
-            <div className="banner-ad">
+      <div className="w-full h-[700px] relative">
+          <img src={data?.image} alt="" className="w-full h-full object-cover"/>
+          <div className="banner-ad absolute bottom-0 left-0 w-full">
               <AddBanner />
             </div>
           </div>
+          
+      <div className="container">
+        <div className="flex justify-center items-center flex-col">
+          
+          {/* <UserPen width={100} height={100} color="#3598FF" /> */}
+          <h1 className="text-slate-400 text-[60px]  font-mono mt-[70px]">{data?.title}</h1>
+          <div className="service-page">
+            {/* <h1>{data?.title}</h1> */}
+
+           
+          </div>
           <div className="description">
             {
-              parse(`<div>${data?.descriptions}</div>`)
+              parse(`<div className="description-inner">${data?.descriptions}</div>`)
             }
           </div>
           <div className="service-images ">
