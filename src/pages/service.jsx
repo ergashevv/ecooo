@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import Header from '../containers/header'
-import './main.scss'
+import './service.scss'
 import AddBanner from "../components/add-banner";
 import parse from 'html-react-parser';
 import { Image } from 'antd';
 const ServicePage = () => {
     const { id } = useParams()
+    const pEle = document.getElementsByTagName('p')
+    for(let i=0;i<pEle.length;i++){
+        const p = pEle[i]
+        if(p.textContent && p.textContent.length < 20){
+            p.style.display = 'none'
+        }
+    }
 
     const [data, setData] = useState(null);
     const url = `http://185.105.90.191:83/service/${id}`
