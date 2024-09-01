@@ -16,7 +16,7 @@ import ServicePage from "./pages/service.jsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-    <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/about" element={<About />} />
@@ -25,9 +25,9 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/members" element={<Members />} />
         <Route path="/career" element={<Career />} />
         <Route path="/service/:id" element={<ServicePage />} />
-        <Route path="/resource" element={<Resource />} />
+        <Route path="/resource/:id" element={<Resource />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   </StrictMode>
 );

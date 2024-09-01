@@ -30,7 +30,6 @@ const ServicePage = () => {
 
         fetchData();
     }, [url]);
-    console.log(data?.descriptions, 'data');
     return (
         <>
             <Header />

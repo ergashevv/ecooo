@@ -14,9 +14,9 @@ import { useLocation } from 'react-router-dom';
 import './main.scss'
 const Header = () => {
   const location = useLocation()
-  useEffect(() =>{
-    window.scrollTo(0,0)
-  },[location.pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
   const [data, setData] = useState(null);
   const url = "http://185.105.90.191:83/service/"
   useEffect(() => {
@@ -39,6 +39,30 @@ const Header = () => {
 
     fetchData();
   }, [url]);
+  const [data2, setData2] = useState(null);
+  const url2 = "http://185.105.90.191:83/resource/"
+  useEffect(() => {
+    const fetchData2 = async () => {
+      try {
+        const response = await fetch(url2);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData2(result);
+      } catch (err) {
+        console.log(err);
+
+      } finally {
+        console.log("hi");
+
+      }
+    };
+
+    fetchData2();
+  }, [url2]);
+  console.log(data2, 'data2');
+
   const navigate = useNavigate()
   return (
     <div className="bg-white header  fixed z-10 w-full">
@@ -76,9 +100,15 @@ const Header = () => {
             <MenubarMenu>
               <MenubarTrigger>Resources</MenubarTrigger>
               <MenubarContent>
-                <MenubarItem className="cursor-pointer">
-                  <Link to="/resource">resource</Link>
-                </MenubarItem>
+                {
+                  data2?.map((item, key) => (
+                    <MenubarItem onClick={() => navigate(`/resource/${item.id}`)} className="cursor-pointer" style={{
+                      marginLeft: "0"
+                    }} key={key}>
+                      {item.title}
+                    </MenubarItem>
+                  ))
+                }
 
               </MenubarContent>
             </MenubarMenu>
